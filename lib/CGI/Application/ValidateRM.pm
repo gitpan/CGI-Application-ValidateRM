@@ -16,7 +16,7 @@ require Exporter;
 	validate_rm	
 );
 
-$VERSION = '1.04';
+$VERSION = '1.05';
 
 sub check_rm {
      my $self = shift;
@@ -160,12 +160,16 @@ In a CGI::Application module:
  sub _form_profile {
  	return {
  		required => 'email',
+		msgs => {
+			any_errors => 'some_errors', 
+			prefix => 'err_',
+		},
  	};
  }
 
 In page.html:
 
- <!-- tmpl_if err__ -->
+ <!-- tmpl_if some_errors -->
  	<h3>Some fields below are missing or invalid</h3>
  <!-- /tmpl_if -->
  <form>
@@ -179,12 +183,12 @@ L<CGI::Application>, L<Data::FormValidator>, perl(1)
 
 =head1 AUTHOR
 
-Mark Stosberg <mark@stosberg.com>
+Mark Stosberg <mark@summersault.com>
 
 
 =head1 LICENSE
 
-Copyright (C) 2003 Mark Stosberg <mark@stosberg.com>
+Copyright (C) 2003 Mark Stosberg <mark@summersault.com>
 
 This module is free software; you can redistribute it and/or modify it
 under the terms of either:

@@ -1,5 +1,9 @@
 Revision history for Perl extension CGI::Application::ValidateRM.
 
+1.05 Sun Jun 22 2003 
+	- Improved examples in documentation (Mike Fragassi)
+	  No functionality changes. 
+
 1.04 Tue May 27 2003
  	- Fixed Build.PL syntax problem (Mike Fragassi)
 

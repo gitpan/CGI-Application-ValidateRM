@@ -87,12 +87,16 @@ EXAMPLE
      sub _form_profile {
             return {
                     required => 'email',
+                    msgs => {
+                            any_errors => 'some_errors', 
+                            prefix => 'err_',
+                    },
             };
      }
 
     In page.html:
 
-     <!-- tmpl_if err__ -->
+     <!-- tmpl_if some_errors -->
             <h3>Some fields below are missing or invalid</h3>
      <!-- /tmpl_if -->
      <form>
@@ -103,10 +107,10 @@ SEE ALSO
     CGI::Application, Data::FormValidator, perl(1)
 
 AUTHOR
-    Mark Stosberg <mark@stosberg.com>
+    Mark Stosberg <mark@summersault.com>
 
 LICENSE
-    Copyright (C) 2003 Mark Stosberg <mark@stosberg.com>
+    Copyright (C) 2003 Mark Stosberg <mark@summersault.com>
 
     This module is free software; you can redistribute it and/or modify it
     under the terms of either:
