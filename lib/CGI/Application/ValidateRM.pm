@@ -15,7 +15,7 @@ require Exporter;
 	validate_rm	
 );
 
-$VERSION = '1.10';
+$VERSION = '1.11';
 
 sub check_rm {
      my $self = shift;
@@ -197,6 +197,11 @@ L<CGI::Application>, L<Data::FormValidator>, L<HTML::FillInForm>, perl(1)
 
 Mark Stosberg <mark@summersault.com>
 
+=head1 MAILING LIST
+
+If you have any questions, comments, bug reports or feature suggestions,
+post them to the support mailing list! This the Data::FormValidator list. 
+To join the mailing list, visit L<http://lists.sourceforge.net/lists/listinfo/cascade-dataform>
 
 =head1 LICENSE
 

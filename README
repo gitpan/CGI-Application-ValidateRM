@@ -113,6 +113,12 @@ SEE ALSO
 AUTHOR
     Mark Stosberg <mark@summersault.com>
 
+MAILING LIST
+    If you have any questions, comments, bug reports or feature suggestions,
+    post them to the support mailing list! This the Data::FormValidator
+    list. To join the mailing list, visit
+    <http://lists.sourceforge.net/lists/listinfo/cascade-dataform>
+
 LICENSE
     Copyright (C) 2003 Mark Stosberg <mark@summersault.com>
 

@@ -1,5 +1,5 @@
 This file contains message digests of all files listed in MANIFEST,
-signed via the Module::Signature module, version 0.37.
+signed via the Module::Signature module, version 0.38.
 
 To verify the content in this distribution, first make sure you have
 Module::Signature installed, then type:
@@ -15,12 +15,12 @@ not run its Makefile.PL or Build.PL.
 Hash: SHA1
 
 SHA1 aad1ec4063243f55c106cb3dd30a750d9b300261 Build.PL
-SHA1 4a2fc2e31fe5da698251a3a40b73f227a685036d Changes
-SHA1 68f252a417ce3d6f0a9a157f7f3b6a937487077e MANIFEST
-SHA1 76202682b5795df617619c36c8a5ac6659c7a74a META.yml
-SHA1 70ff32c76b28785dc7525f969b962d893fc1a6d6 Makefile.PL
-SHA1 00e8e7a1a846f431d6c237ad5e482d46c55a822d README
-SHA1 c70e314ca3bb67e44b286c4c34adab1d1229774a lib/CGI/Application/ValidateRM.pm
+SHA1 f13d0a3d12381767e929cf1a7e4ab3788fae82f1 Changes
+SHA1 bc55e0e16d916471f42262979dd4014d10c3cbf9 MANIFEST
+SHA1 3045f645929d2b82b94d0698b37cb1ae5f0ac18d META.yml
+SHA1 81a5922b973e17f63ea07732b6cc6944675fdf71 Makefile.PL
+SHA1 561a8b2dd9b1083df5d2209e8b50ca6a682f9f55 README
+SHA1 2e373e0e69e9b440435762b8b9e256592928fbef lib/CGI/Application/ValidateRM.pm
 SHA1 3f30f767ee56b627f3a98c6b56cb29b599513bd1 t/01_basic.t
 SHA1 5cb80640b4990bd90abc37269943241b8b51a2d9 t/01_display.html
 SHA1 a1ed6753b9799b39b9f34db60ae72daeae7853c0 t/99_pod.t
@@ -28,7 +28,7 @@ SHA1 ed242d567d58da459fc43bd964e6276e6424fa68 t/TestApp1.pm
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.2.1 (FreeBSD)
 
-iD8DBQE/zKpvsKQdKVrv3XwRAlzDAJ4lavd3iINDYjiKnerrqXWNJ+xlSACeKMzT
-1+qBx98xIE4Jd02Zig2cBzg=
-=GKBO
+iD8DBQFAPsk4sKQdKVrv3XwRAr2vAJsHiHUE40ZIJCgulhltnMjfcXNR1gCfeaOa
+FzywtQPjGUu1rvOg6L7x8cI=
+=OCsF
 -----END PGP SIGNATURE-----

@@ -1,5 +1,8 @@
 Revision history for Perl extension CGI::Application::ValidateRM.
 
+1.11 Thu Feb 26 2004
+    - Document appropriate support mailing list
+
 1.10 Mon Dec 01 2003
     - CGI::Carp is no longer used. (Steve Hay)
 
