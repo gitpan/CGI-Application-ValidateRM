@@ -1,6 +1,6 @@
 package CGI::Application::ValidateRM;
 use HTML::FillInForm;
-use Data::FormValidator 2.05;
+use Data::FormValidator 2.10;
 use CGI::Carp;
 use strict;
 use vars qw($VERSION @ISA @EXPORT @EXPORT_OK);
@@ -15,7 +15,7 @@ require Exporter;
 	validate_rm	
 );
 
-$VERSION = '1.00';
+$VERSION = '1.01';
 
 sub validate_rm {
 	my $self = shift;

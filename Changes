@@ -1,5 +1,8 @@
 Revision history for Perl extension CGI::Application::ValidateRM.
 
+1.01 Wed Apr 23	
+	- Bug Fix: Makefile.PL syntax fixed. No code changes.
+
 1.00 Sun Apr 20
 	- New Feature: added support for Data::FormValidator's new custom error
 	  message facility. This version is /not/ backwards compatible.

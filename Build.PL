@@ -1,3 +1,4 @@
+shift(@ARGV) if $ARGV[0] eq 'Build'; # accomodate with CPAN autoinstall
 use Module::Build;
 
 Module::Build->new(
