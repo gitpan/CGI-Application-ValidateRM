@@ -1,5 +1,9 @@
 Revision history for Perl extension CGI::Application::ValidateRM.
 
+1.12 Sat May 08 2004
+    - Options can now be passed through to HTML::FillInForm (Gabor Szabo)
+    - tests cleaned up to be more sensible
+
 1.11 Thu Feb 26 2004
     - Document appropriate support mailing list
 

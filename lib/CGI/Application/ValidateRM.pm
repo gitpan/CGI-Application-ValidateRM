@@ -15,12 +15,13 @@ require Exporter;
 	validate_rm	
 );
 
-$VERSION = '1.11';
+$VERSION = '1.12';
 
 sub check_rm {
      my $self = shift;
 	 my $return_rm = shift || die 'missing required return run mode';
      my $profile_in = shift || die 'missing required profile';
+     my $fif_params = shift || {}; 
 
 	# If the profile is not a hash reference, 
 	# assume it's a CGI::App method
@@ -53,7 +54,8 @@ sub check_rm {
 		 my $fif = new HTML::FillInForm;
 		 $err_page = $fif->fill(
              scalarref => $return_pageref,
-			 fobject => $self->query
+			 fobject => $self->query,
+             %$fif_params,
 		 );
 	}
 	return ($r,$err_page);
@@ -81,6 +83,11 @@ CGI::Application::ValidateRM - Help validate CGI::Application run modes using Da
  my ($results,$err_page) = $self->check_rm('form_display','_form_profile');
   return $err_page if $err_page; 
 
+
+ # Optionally, you can pass additional options to HTML::FillInForm->fill()
+ my ($results,$err_page) = $self->check_rm('form_display','_form_profile', { fill_password => 0 });
+  return $err_page if $err_page; 
+
 =head1 DESCRIPTION
 
 CGI::Application::ValidateRM helps to validate web forms when using the
@@ -88,7 +95,7 @@ CGI::Application framework and the Data::FormValidator module.
 
 =head2 check_rm
 
-This CGI::Application method takes two inputs and returns two outputs. Its
+This CGI::Application method takes three inputs and returns two outputs. Its
 return values are a L<Data::FormValidator::Results> object and, if any fields
 defined in the profile are missing or invalid, an error page.
 The inputs are as follows:
@@ -121,6 +128,11 @@ triggering an error when the errors are I<not> being displayed.
 
 This can either be provided as a hash reference, or as the name
 of a CGI::Application method that will return such a hash reference.
+
+=item HTML::FillInForm options (optional)
+
+If desired, you can pass additional options to the HTML::FillInForm C<fill>
+method through a hash reference. See an example above. 
 
 =back
 
