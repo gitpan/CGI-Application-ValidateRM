@@ -1,5 +1,8 @@
 Revision history for Perl extension CGI::Application::ValidateRM.
 
+1.04 Tue May 27 2003
+ 	- Fixed Build.PL syntax problem (Mike Fragassi)
+
 1.03 Sun May 11 2003
 	- Added check_rm, which returns the results as a
 	  Data::FormValidator::Results object.

@@ -16,7 +16,7 @@ require Exporter;
 	validate_rm	
 );
 
-$VERSION = '1.02';
+$VERSION = '1.04';
 
 sub check_rm {
      my $self = shift;

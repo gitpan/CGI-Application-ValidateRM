@@ -15,21 +15,20 @@ not run its Makefile.PL or Build.PL.
 Hash: SHA1
 
 SHA1 ba294c77856a2df2c641ea9e42dcb6d2d5202f7b Build.PL
-SHA1 ad6228606aadf4180e26f937e0af891367aab658 Changes
+SHA1 9082d01da49c30ddea12d4833f13e11bf8e13292 Changes
 SHA1 26ca11de757c98a437d7419d0c25a4d5caa02c74 MANIFEST
 SHA1 c4cb19faaf03b2b179d918bca58e4386a5c75048 META.yml
-SHA1 3881837767c85ffc51f01f9fbd9bc561768d1cc1 Makefile.PL
+SHA1 f875a48340b43be10bc8d9da604aaeee607de110 Makefile.PL
 SHA1 77f58a79ceba75eceac3f53c58a971ef5e678c05 README
-SHA1 db91a2d7423ecc80f67fa77facfde4d2ce5c21f0 lib/CGI/Application/ValidateRM.pm
+SHA1 15e11b5e875c5eed63d0788e406d7666842a908d lib/CGI/Application/ValidateRM.pm
 SHA1 8da06dbb05c562e1720e2e75ab3a25641cef58f1 t/01_basic.t
 SHA1 5cb80640b4990bd90abc37269943241b8b51a2d9 t/01_display.html
 SHA1 a1ed6753b9799b39b9f34db60ae72daeae7853c0 t/99_pod.t
 SHA1 051eb99f79b5f0d8b7173e45eb93445de3712a8b t/TestApp1.pm
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.0.6 (FreeBSD)
-Comment: For info see http://www.gnupg.org
+Version: GnuPG v1.2.1 (FreeBSD)
 
-iD8DBQE+vtExsKQdKVrv3XwRAhuxAJwPB32XAT9MAOADnIP/CxEGnQpNHwCcDCTY
-UoGhHBTBV7V0K4jzEM5Jnls=
-=tVGR
+iD8DBQE+1DXpsKQdKVrv3XwRApkfAJsHqlCqZhzfAKwrRnwK+Yfn3FE3BwCffFPv
+w6ZVfPyY4Em7+8lJyL0Djok=
+=N7S6
 -----END PGP SIGNATURE-----

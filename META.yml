@@ -1,11 +1,11 @@
 --- #YAML:1.0
 name: CGI-Application-ValidateRM
-version: 1.02
+version: 1.04
 license: perl
 distribution_type: module
 requires:
   CGI::Application: 3
-  Data::FormValidator: 2.1
+  Data::FormValidator: 3
   HTML::FillInForm: 0
 recommends: {}
 build_requires: {}
@@ -13,5 +13,5 @@ conflicts: {}
 provides:
   CGI::Application::ValidateRM:
     file: lib/CGI/Application/ValidateRM.pm
-    version: 1.02
+    version: 1.04
 generated_by: Module::Build version 0.18
