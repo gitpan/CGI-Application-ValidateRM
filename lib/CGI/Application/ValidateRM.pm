@@ -16,7 +16,7 @@ require Exporter;
 	validate_rm	
 );
 
-$VERSION = '1.05';
+$VERSION = '1.07';
 
 sub check_rm {
      my $self = shift;
@@ -30,7 +30,9 @@ sub check_rm {
 		$profile = $profile_in;
 	}
 	else {
-		$profile = $self->$profile_in;
+		$profile = eval { $self->$profile_in() };
+        die "Error executing run mode '$profile_in': $@" if $@;
+
 	}
  
      require Data::FormValidator;
@@ -80,14 +82,18 @@ CGI::Application framework and the Data::FormValidator module.
 
 =head2 check_rm
 
-This CGI::Application method takes two inputs, as follows:
+This CGI::Application method takes two inputs and returns two outputs. Its
+return values are a L<Data::FormValidator::Results> object and, if any fields
+defined in the profile are missing or invalid, an error page.
+The inputs are as follows:
 
 =over
 
 =item Return run mode
 
-This run mode will be used to generate an error page, with the form re-filled and
-error messages in the form. This page will returned as a second output parameter.
+This run mode will be used to generate an error page, with the form re-filled
+(using HTML::FillInForm) and error messages in the form. This page will be
+returned as a second output parameter.
 
 The errors will be passed in as a hash reference, which can then be handed to a
 templating system for display.  
@@ -105,7 +111,7 @@ HTML::Template users may want to pass C<die_on_bad_params=E<gt>0> to the
 HTML::Template constructor to prevent the presence of the "err_" tokens from
 triggering an error when the errors are I<not> being displayed.
 
-=item Data::FormVaildator  profile
+=item Data::FormValidator profile
 
 This can either be provided as a hash reference, or as the name
 of a CGI::Application method that will return such a hash reference.
@@ -113,14 +119,14 @@ of a CGI::Application method that will return such a hash reference.
 =back
 
 Additionally, the value of the 'dfv_defaults' param from the calling
-object is optionally used to pass deftauls to the C<new()> constructor.
+object is optionally used to pass defaults to the C<new()> constructor.
 
   $self->param('dfv_defaults')
 
 By setting this to a hash reference of defaults in your C<cgiapp_init> routine
 in your own super-class, you could make it easy to share some default settings for
 Data::FormValidator across several forms. Of course, you could also set parameter
-through an instance script. 
+through an instance script via the PARAMS key.
 
 =head2 validate_rm 
 
@@ -179,7 +185,7 @@ In page.html:
 
 =head1 SEE ALSO
 
-L<CGI::Application>, L<Data::FormValidator>, perl(1)
+L<CGI::Application>, L<Data::FormValidator>, L<HTML::FillInForm>, perl(1)
 
 =head1 AUTHOR
 
