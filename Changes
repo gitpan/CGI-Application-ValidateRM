@@ -1,7 +1,18 @@
 Revision history for Perl extension CGI::Application::ValidateRM.
 
-1.01 Wed Apr 23	
-	- Bug Fix: Makefile.PL syntax fixed. No code changes.
+1.03 Sun May 11 2003
+	- Added check_rm, which returns the results as a
+	  Data::FormValidator::Results object.
+
+	- New Feature: Support for supplying defaults to the Data::FormValidator
+      new() constructor by using the 'dfv_defaults' parameter.
+
+	- New Feature: The profile can now be provided as the name of
+	  a CGI::Application method which returns the appropriate hash reference. 
+      
+	- Also note that non-backwards compatible changes were made to D::FV's msgs
+      interface. Although it doesn't affect the interface of this module,
+	  non-backwards compatible changes were made to accomodate it.
 
 1.00 Sun Apr 20
 	- New Feature: added support for Data::FormValidator's new custom error

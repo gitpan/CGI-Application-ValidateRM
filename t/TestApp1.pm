@@ -35,11 +35,10 @@ sub form_process {
 	my $self = shift;
 
 	use CGI::Application::ValidateRM;
-	my ($valid_href, $err_page) = $self->validate_rm('form_display', _form_profile() );
+	my ($results, $err_page) = $self->validate_rm('form_display', '_form_profile' );
 	return $err_page if $err_page; 
 
-	my $t = $self->load_tmpl('success.html');
-	return $t->output;
+	return 'success';
 }
 
 sub _form_profile {
@@ -48,7 +47,10 @@ sub _form_profile {
 		constraints => {
 			email => 'email',
 		},
-		msgs => { prefix => '' },
+		msgs => { 
+			any_errors => 'err__',
+			prefix => 'err_',
+		},
 	};
 }
 
