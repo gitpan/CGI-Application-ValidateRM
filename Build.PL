@@ -19,6 +19,7 @@ $class->new(
 		'Data::FormValidator' => 3.00,
 		'HTML::FillInForm'	  => 0,	 
 	},
+    create_makefile_pl => 'traditional',
 	sign=>1,
 )->create_build_script;
 

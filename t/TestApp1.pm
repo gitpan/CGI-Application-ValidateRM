@@ -1,4 +1,3 @@
-
 package TestApp1;
 
 use strict;
@@ -14,6 +13,8 @@ sub setup {
 	$self->run_modes(qw/
 		form_display
 		form_process
+        form_display_with_ref
+        form_process_with_ref
 	/);
 }
 
@@ -23,12 +24,26 @@ sub form_display {
 	my $self = shift;
 	my $errs = shift;
 
-	my $t = $self->load_tmpl('t/01_display.html',
-		die_on_bad_params=>0,
-		);
+	my $t = $self->load_tmpl('t/01_display.html', die_on_bad_params=>0);
+    my $t2_obj = TestApp1->new(QUERY=>CGI->new("email=broken;rm=form_display_with_ref") );
+    my $t2_output = $t2_obj->run();
 
 	$t->param($errs) if $errs;
 	return $t->output;
+}
+
+# This is another run mode that will be validated. Similar, but this one
+# returns a reference to the output rather than returning the output itself.
+sub form_display_with_ref {
+    my $self = shift;
+    my $errs = shift;
+
+    my $t = $self->load_tmpl('t/01_display.html',
+        die_on_bad_params=>0,
+        );
+
+    $t->param($errs) if $errs;
+    return \$t->output;
 }
 
 sub form_process {
@@ -39,6 +54,16 @@ sub form_process {
 	return $err_page if $err_page; 
 
 	return 'success';
+}
+
+sub form_process_with_ref {
+    my $self = shift;
+
+    use CGI::Application::ValidateRM;
+    my ($results, $err_page) = $self->validate_rm('form_display_with_ref', '_form_profile' );
+    return $err_page if $err_page;
+
+    return 'success';
 }
 
 sub _form_profile {

@@ -1,7 +1,6 @@
 package CGI::Application::ValidateRM;
 use HTML::FillInForm;
 use Data::FormValidator;
-use CGI::Carp;
 use strict;
 use vars qw($VERSION @ISA @EXPORT @EXPORT_OK);
 
@@ -16,7 +15,7 @@ require Exporter;
 	validate_rm	
 );
 
-$VERSION = '1.07';
+$VERSION = '1.10';
 
 sub check_rm {
      my $self = shift;
@@ -30,8 +29,13 @@ sub check_rm {
 		$profile = $profile_in;
 	}
 	else {
-		$profile = eval { $self->$profile_in() };
-        die "Error executing run mode '$profile_in': $@" if $@;
+        if ($self->can($profile_in)) {
+            $profile = $self->$profile_in();
+        }
+        else {
+            $profile = eval { $self->$profile_in() };
+            die "Error running profile method '$profile_in': $@" if $@;
+        }
 
 	}
  
@@ -43,10 +47,12 @@ sub check_rm {
 	my $err_page;
 	if ($r->has_missing or $r->has_invalid) {
 		 my $return_page = $self->$return_rm($r->msgs);
+         my $return_pageref = (ref($return_page) eq 'SCALAR')
+             ? $return_page : \$return_page;
 		 require HTML::FillInForm;
 		 my $fif = new HTML::FillInForm;
 		 $err_page = $fif->fill(
-			 scalarref => \$return_page,
+             scalarref => $return_pageref,
 			 fobject => $self->query
 		 );
 	}

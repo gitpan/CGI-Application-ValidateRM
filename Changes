@@ -1,5 +1,15 @@
 Revision history for Perl extension CGI::Application::ValidateRM.
 
+1.10 Mon Dec 01 2003
+    - CGI::Carp is no longer used. (Steve Hay)
+
+    - Module::Build is no longer required for installation 
+
+    - support has been added for returning scalar refs from
+      the run mode being validated. (Steve Hay)
+
+    - use of eval / die has been minimized a bit. (Steve Hay)
+
 1.07 Wed Oct 15 2003
     - Documentation improvements (William McKee)
 
