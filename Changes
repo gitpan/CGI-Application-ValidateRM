@@ -1,0 +1,9 @@
+Revision history for Perl extension CGI::Application::ValidateRM.
+
+0.02  Sat Apr 12  
+	- Bug Fix: options passed through vrm param weren't being respected
+	(Neil Mansilla)
+
+0.01  Sat Mar 29 07:46:31 2003
+	- original version; created by h2xs 1.19
+
