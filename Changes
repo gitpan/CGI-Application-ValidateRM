@@ -1,5 +1,11 @@
 Revision history for Perl extension CGI::Application::ValidateRM.
 
+1.00 Sun Apr 20
+	- New Feature: added support for Data::FormValidator's new custom error
+	  message facility. This version is /not/ backwards compatible.
+	  Some has the functionality of this module is now available in
+	  Data::FormValidator.
+
 0.02  Sat Apr 12  
 	- Bug Fix: options passed through vrm param weren't being respected
 	(Neil Mansilla)

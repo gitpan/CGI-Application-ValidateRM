@@ -1,7 +1,10 @@
+Build.PL
 Changes
 MANIFEST
+META.yml
 Makefile.PL
-ValidateRM.pm
+SIGNATURE
+lib/CGI/Application/ValidateRM.pm
 t/01_basic.t
 t/01_display.html
 t/99_pod.t

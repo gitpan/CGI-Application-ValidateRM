@@ -1,4 +1,4 @@
-use Test::More tests => 7;
+use Test::More tests => 4;
 BEGIN { use_ok('CGI::Application::ValidateRM') };
 
 use CGI::Application::ValidateRM;
@@ -25,22 +25,4 @@ like($t1_output, qr/name="email".*Invalid/, 'basic invalid');
 
 like($t1_output,qr/name="phone".*Missing/, 'basic missing');
 
-
- my $t2_obj    = TestApp1->new(
- 	QUERY=>CGI->new("email=broken"),
-	params => {
-		vrm => {
-			error_fmt => 'Test-Error-Fmt<b>* %s</b>',
-			missing   => 'Test-Missing',
-			invalid   => 'Test-Invalid',
-		},
-	}
- );
-
- my $t2_output = $t2_obj->run();
- 
- like($t2_output, qr/Test-Error-Fmt/, 'over-riding error_fmt');
- like($t2_output, qr/Test-Missing/, 'over-riding missing');
- like($t2_output, qr/Test-Invalid/, 'over-riding invalid');
- 
 

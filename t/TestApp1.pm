@@ -47,7 +47,8 @@ sub _form_profile {
 		required => [qw/email phone/],
 		constraints => {
 			email => 'email',
-		}
+		},
+		msgs => { prefix => '' },
 	};
 }
 

@@ -1,6 +1,6 @@
 package CGI::Application::ValidateRM;
 use HTML::FillInForm;
-use Data::FormValidator;
+use Data::FormValidator 2.05;
 use CGI::Carp;
 use strict;
 use vars qw($VERSION @ISA @EXPORT @EXPORT_OK);
@@ -14,39 +14,22 @@ require Exporter;
 @EXPORT = qw(
 	validate_rm	
 );
-$VERSION = '0.02';
 
-
-# Preloaded methods go here.
+$VERSION = '1.00';
 
 sub validate_rm {
 	my $self = shift;
 	my $return_rm  = shift  || die 'validate_rm: missing required input argument';
+	croak "Bad argument to validate_rm: '$return_rm' is not an object method" unless $self->can($return_rm); 
 	my $profile = shift || die 'validate_rm: missing required input argument';
+	$profile->{msgs} || die 'validate_rm: profile must use msgs key';
 
-	require Data::FormValidator;
-	my $v = new Data::FormValidator({ profile => $profile });
-	my ($valid,$missing,$invalid) =  $v->validate($self->query, 'profile');
+	my ($valid,$missing,$invalid) =  Data::FormValidator->validate($self->query, $profile);
 
 	# if there are errors, prepare an error page;
 	my $err_page;
-	if (@$missing or @$invalid) {
-		 croak "Bad argument to validate_rm: '$return_rm' is not an object method" unless $self->can($return_rm);                                                                                                            
-		 my %opt;
-		 if (ref $self->param('vrm') eq 'HASH') {
-		 	my $opt_ref = $self->param('vrm');
-			%opt = %$opt_ref;
-		 }
-
-		 my %defaults = (
-			 error_fmt => '<span style="color:red;font-weight:bold"><span id="vrm_errors">* %s</span></span>',
-			 missing   => 'Missing',
-			 invalid   => 'Invalid',
-		 );
-		 %opt = ( %defaults, %opt );
-
-		 my $return_page = $self->$return_rm(error_marks($missing, $invalid,undef,\%opt));
-
+	if (keys %$missing or keys %$invalid) {
+		 my $return_page = $self->$return_rm({ %$missing, %$invalid, err__ => 1 }  );
 		 require HTML::FillInForm;
 		 my $fif = new HTML::FillInForm;
 		 $err_page = $fif->fill(
@@ -58,31 +41,10 @@ sub validate_rm {
 	return ($valid,$err_page);
 }
 
-# This will eventually support Data::FormValidators
-# ability to have multiple constraints on a single field
-sub error_marks {
-	my ($missing, $invalid, $msgs, $opt) = @_;
-
-  # set one field just to say "we have some errors"
-  my $err_h;
-  $err_h = { 'err__' => 1 } if @$missing or @$invalid;
-
-	foreach my $err (@$missing) {
-		$msgs->{$err} ||= $opt->{missing};
-		$err_h->{'err_'.$err} = sprintf $opt->{error_fmt}, $msgs->{$err};
-	}
-	foreach my $err (@$invalid) {
-		$msgs->{$err} ||= $opt->{invalid};
-		$err_h->{'err_'.$err} = sprintf $opt->{error_fmt}, $msgs->{$err};
-	}
-	return $err_h;
-}
-
 # Autoload methods go after =cut, and are processed by the autosplit program.
 
 1;
 __END__
-# Below is the stub of documentation for your module. You better edit it!
 
 =head1 NAME
 
@@ -103,7 +65,7 @@ CGI::Application framework and the Data::FormValidator module.
 
 B<validate_rm> 
 
-This CGI::Application method takes two required and one optional argument, as
+This CGI::Application method takes two required arguments , as
 follows:
 
 =over 
@@ -120,38 +82,28 @@ templating system for display.  The hash will look like this:
  }
 
 The first field is just say "We have some errors". You can check for this in
-your template system to display a general message at the top of the page.  The
-remaining fields will have "err_" prepended to name of the offending field.
+your template system to display a general message at the top of the page.  
+
+The remaining fields should be prepared using Data::FormValidator's
+built-in support for returning error messages as a hash reference.   
+Returning the errors with a prefix, such as "err_" is recommended. 
+To use this prefix and the other defaults, add this to your Data::FormValidator
+profile:
+
+msgs => { prefix =>'' },
+
 
 HTML::Template users may want to pass C<die_on_bad_params=E<gt>0> to the
 HTML::Template constructor to prevent the preference of the "err_" tokens from
 triggering an error when the errors are I<not> being displayed.
 
 By default the text will be styled bold and red. This default can be overridden
-using the parameterse in the third argument.
+in the Data::FormValidator profile.
 
 =item 2. A hash reference to a Data::FormValidator profile.
 
 You can also put a subroutine call here, as long as the subroutine returns the
-right hash reference.
-
-=item 3. A hash reference of options to override the default text and formatting.
-
-The defaults are as follows:
-
- {
-   error_fmt => 
-    '<span style="color:red;font-weight:bold"><span id="vrm_errors">%s</span></span>',
-   missing   => 'Missing',
-   invalid   => 'Invalid',
- }
-
-You can see that the error format first styles the text red and bold, which can
-be overridden with a style sheet by applying a style to C<vrm_errors>.
-
-To alleviate the need for passing in your own preferences here everytime, the
-function will check the contents of the C<vrm> CGI::Application parameter,
-If it contains a hash reference with appropriate keys, it will be tried first.
+a compatible hash reference.
 
 =back
 
@@ -197,14 +149,6 @@ In page.html:
  	<input type="text" name="email"> <!-- tmpl_var err_email -->
  </form>
 
-
-=head1 KNOWN BUGS
-
-Currently Data::FormValidator's ability to apply multiple constraints to a
-single field is not supported.
-
-There's probably a better way to handle the internationalization of the
-strings.
 
 =head1 SEE ALSO
 

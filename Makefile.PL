@@ -13,4 +13,4 @@ WriteMakefile(
 		'AUTHOR' => 'Mark Stosberg <mark@summersault.com>',
 		'ABSTRACT' => 'Help validate CGI::Application run modes using Data::FormValidator',
 	) : (),   # For ActivePerl PPM
-);
+)
